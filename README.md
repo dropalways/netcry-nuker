@@ -1,1 +1,5 @@
-# discord-raider
+# what do i name this 🤔
+
+## Features
+
+Nothing
