@@ -10,7 +10,7 @@ def ball():
     elif token == "single token here":
         print("Edit the file token.txt dumbass")
     else:
-        selfbot = input("Selfbot? [y|n]")
+        selfbot = input("Selfbot? [y|n] ")
         if selfbot == "y":
             bottoken = "True"
         elif selfbot == "n":
@@ -50,7 +50,7 @@ def ban_member(guild_id, user_id, headers, token):
     if response.status_code == 200:
         print(f"Banned {user_id}")
     elif response.status_code == 429:
-        print(f"Ratelimited waiting 3 seconds... {response.status_code})
+        print(f"Ratelimited waiting 3 seconds... {response.status_code}")
         time.sleep(3)
     else:
         print(f"Failed to ban{user_id} {response.status_code}")
