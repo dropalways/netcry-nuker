@@ -29,8 +29,7 @@ def main():
         user_input = user_input.lower()
     
         if user_input == "1":
-            subprocess.run(["python", "commands/"])
-            
+            subprocess.run(["python", "commands/massban.py"])
         else:
             print("Error 404 command not found")
             time.sleep(0.7)
