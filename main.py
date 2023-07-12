@@ -9,16 +9,17 @@ import subprocess
 
 init()
 
-options = """+-----------------+-----------------+
-|                 |  [8]            |
-|  [1] Mass ban   |  [9]            |
-|  [2] Option 2   |  [10]           |
-|  [3] Option 3   |  [11]           |
-|  [4] Option 4   |  [12]           |
-|  [5]            |  [13]           |
-|  [6]            |  [14]           |
-|  [7]            |  [15]           |
-+-----------------+-----------------+
+options = """
++---------------------------------+--------------------------------+
+|                                 |  [8]                           |
+|  [1] Mass ban                   |  [9]                           |
+|  [2] Mass create channels       |  [10]                          |
+|  [3] Delete all channels        |  [11]                          |
+|  [4] Webhook spammer            |  [12]                          |
+|  [5]                            |  [13]                          |
+|  [6]                            |  [14]                          |
+|  [7]                            |  [15]                          |
++---------------------------------+--------------------------------+
 """
 
 def banner():
@@ -44,6 +45,18 @@ def main():
     
         if user_input == "1":
             subprocess.run(["python", "commands/massban.py"])
+            time.sleep(1.9)
+            main()
+        elif user_input == "2":
+            subprocess.run(["python", "commands/masschannel.py"])
+            time.sleep(1.9)
+            main()
+        elif user_input == "3":
+            subprocess.run(["python", "commands/massdelch.py"])
+            time.sleep(1.9)
+            main()
+        elif user_input == "4":
+            subprocess.run(["python", "commands/webhook.py"])
             time.sleep(1.9)
             main()
         else:
