@@ -14,21 +14,21 @@ init()
 
 options = """
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃   Discord: @a1lw and @loding_x  ┃  github.com/dropalways/netcry  ┃
+┃   Discord: @a1lw and @loding_x  ┃     github.com/dropalways/     ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                                 ┃  [8]                           ┃
 ┃  [1] Mass ban                   ┃  [9]                           ┃
 ┃  [2] Mass create channels       ┃  [10]                          ┃
 ┃  [3] Delete all channels        ┃  [11]                          ┃
 ┃  [4] Webhook spammer            ┃  [12]                          ┃
-┃  [5]                            ┃  [13]                          ┃
+┃  [5] Discord nuker bot          ┃  [13]                          ┃
 ┃  [6]                            ┃  [14]                          ┃
 ┃  [7]                            ┃  [15]                          ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 """
 
 def banner():
-    banner_text = Fore.RED + """ ███▄    █ ▓█████▄▄▄█████▓ ▄████▄  ██▀███  ▓██   ██▓
+    banner_text = """ ███▄    █ ▓█████▄▄▄█████▓ ▄████▄  ██▀███  ▓██   ██▓
  ██ ▀█   █ ▓█   ▀▓  ██▒ ▓▒▒██▀ ▀█ ▓██ ▒ ██▒ ▒██  ██▒
 ▓██  ▀█ ██▒▒███  ▒ ▓██░ ▒░▒▓█    ▄▓██ ░▄█ ▒  ▒██ ██░
 ▓██▒  ▐▌██▒▒▓█  ▄░ ▓██▓ ░ ▒▓▓▄ ▄██▒██▀▀█▄    ░ ▐██▓░
@@ -37,7 +37,7 @@ def banner():
 ░ ░░   ░ ▒░ ░ ░      ░      ░  ▒    ░▒ ░ ▒░ ▓██ ░▒░ 
    ░   ░ ░    ░    ░ ░    ░          ░   ░  ▒ ▒ ░░  
          ░    ░           ░ ░        ░      ░ ░     """
-    print(banner_text)
+    print(Colorate.Diagonal(Colors.red_to_purple, banner_text, 8))
 
 def main():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -62,6 +62,10 @@ def main():
             main()
         elif user_input == "4":
             subprocess.run(["python", "commands/webhook.py"])
+            time.sleep(1.9)
+            main()
+        elif user_input == "5":
+            subprocess.run(["python", "commands/nuker.py"])
             time.sleep(1.9)
             main()
         else:
