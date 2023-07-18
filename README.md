@@ -1,5 +1,4 @@
-# what do i name this 🤔
+# NETCRY
 
 ## Features
 
-Nothing rn
