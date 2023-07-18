@@ -33,7 +33,7 @@ def ban_member(guild_id, user_id, token, headers):
     if response.status_code == 204:
         print(f"Banned {user_id}")
     elif response.status_code == 429:
-        print(f"Ratelimited waiting 0.7 seconds... {response.status_code}")
+        print(f"Rate limited, waiting 0.7 seconds... {response.status_code}")
         time.sleep(0.7)
     else:
         print(f"Failed to ban {user_id} {response.status_code}")
