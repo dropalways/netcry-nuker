@@ -67,7 +67,7 @@ async def main():
                 await asyncio.gather(*tasks)
 
             elif response.status == 429:
-                print("Rate limited waiting 0.7 seconds...")
+                print("Rate limited, waiting 0.7 seconds...")
                 await asyncio.sleep(0.7)
             else:
                 print(f"Failed to fetch channels. Status code: {response.status}")
