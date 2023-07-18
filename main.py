@@ -1,14 +1,15 @@
+import os
+import subprocess
 import sys
 sys.dont_write_bytecode = True
+import time
+
 import colorama
 from colorama import Fore, init
 from pystyle import Center, Write, Colors, Colorate
-import os
-import time
-import subprocess
 
 """@a1lw and @loding_x coded this
-if you are going to skid the code keep this please and thank you mr skid man"""
+if you're planning on skidding this code, keep this comment please and thank you mr skid man"""
 
 init()
 
@@ -22,7 +23,7 @@ options = """
 ┃  [4] Webhook spammer            ┃  [13]                           ┃
 ┃  [5] Webhook delete             ┃  [14]                           ┃
 ┃  [6] Nuker bot                  ┃  [15]                           ┃
-┃  [7] Token spammer[dont work]   ┃  [16]                           ┃
+┃  [7] Token spammer[doesn't work]┃  [16]                           ┃
 ┃  [8] Give admin to a user       ┃  [17]                           ┃
 ┃  [9]                            ┃  [18]                           ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -88,7 +89,7 @@ def main():
         elif user_input == "exit":
             sys.exit()
         else:
-            print(Fore.RED +"Error 404 command not found")
+            print(Fore.RED +"Error 404: Command not found")
             time.sleep(0.7)
             main()
 
