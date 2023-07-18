@@ -9,7 +9,7 @@
 
 ---
 
-# How to contribute
-Create a PR(Pull Request)
+# How to contribute to this project
+Create a pull request
 
-We apreaciate our contributors
+We deeply value and appreciate the contributions of our contributors.
