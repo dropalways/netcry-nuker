@@ -3,10 +3,10 @@ import aiohttp
 import sys
 import threading
 
-#this is nearly as fast as nebula nuker bot lol
-#why are you reading the source code?
-#either you think it is a rat or you are trying to skid it hm
-#property of @a1lw on discord or https://github.com/dropalways
+# this is nearly as fast as nebula nuker bot lol
+# why are you reading the source code?
+# either you think it is a rat or you are trying to skid it hm
+# property of @a1lw on discord or https://github.com/dropalways
 
 with open("token.txt", "r") as file:
     token = file.readline().strip()

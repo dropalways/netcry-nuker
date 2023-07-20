@@ -10,7 +10,7 @@ async def send_message(session, webhook_url, message_content, username, successf
             print(f"Message sent successfully. ({successful_messages}/{num_messages})")
             return True
         elif response.status == 429:
-            print("Ratelimited retrying after 2 seconds...")
+            print("Rate limited, retrying after 2 seconds...")
             await asyncio.sleep(2)
             return False
         else:

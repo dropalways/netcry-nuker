@@ -9,7 +9,7 @@ async def create_channel(session, target_id, channel_name, channel_type, headers
         if response.status == 201:
             print(f"Channel '{channel_name}' created successfully.")
         elif response.status == 429:
-            print("Rate limited waiting 0.7 seconds...")
+            print("Rate limited, waiting 0.7 seconds...")
             await asyncio.sleep(0.7)
         else:
             print(f"Failed to create channel '{channel_name}'. Status code: {response.status}")
