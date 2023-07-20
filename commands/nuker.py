@@ -1,5 +1,6 @@
 import asyncio
 import aiohttp
+import sys
 import threading
 
 #this is nearly as fast as nebula nuker bot lol
@@ -7,10 +8,15 @@ import threading
 #either you think it is a rat or you are trying to skid it hm
 #property of @a1lw on discord or https://github.com/dropalways
 
-print("This will only work with bot tokens")
 with open("token.txt", "r") as file:
     token = file.readline().strip()
-
+    if token == "":
+        print("Empty token")
+        sys.exit(1)
+    elif token == "single token here":
+        print("Edit the file token.txt dumbass")
+        sys.exit(1)
+print("This will only work with bot tokens")
 guild_id = input("Guild ID? ")
 themessage = input("Enter message [Enter for default]: ")
 if themessage == "":
