@@ -15,7 +15,7 @@ init()
 
 options = """
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃     discord.gg/9rRHUYzCHG       ┃     github.com/dropalways/      ┃
+┃     discord.gg/9rRHUYzCHG       ┃     github.com/dropalways       ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃  [1] Mass ban                   ┃  [10]                           ┃
 ┃  [2] Mass create channels       ┃  [11]                           ┃

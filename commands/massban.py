@@ -10,7 +10,7 @@ def ball():
     if token == "":
         print("Empty token")
     elif token == "single token here":
-        print("Edit the file token.txt dumbass")
+        print("Edit the 'token.txt' file dumbass")
     else:
         print("This will only work with bot tokens")
         massban(token, headers)
