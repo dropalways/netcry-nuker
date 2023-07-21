@@ -21,7 +21,7 @@ options = """
 ┃  [2] Mass create channels       ┃  [11]                           ┃
 ┃  [3] Delete all channels        ┃  [12]                           ┃
 ┃  [4] Webhook spammer            ┃  [13]                           ┃
-┃  [5] Webhook delete             ┃  [14]                           ┃
+┃  [5] Webhook deleter            ┃  [14]                           ┃
 ┃  [6] Nuker bot                  ┃  [15]                           ┃
 ┃  [7] Channel spammer            ┃  [16]                           ┃
 ┃  [8] Give admin to a user       ┃  [17]                           ┃
