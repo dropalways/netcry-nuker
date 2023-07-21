@@ -23,7 +23,7 @@ options = """
 ┃  [4] Webhook spammer            ┃  [13]                           ┃
 ┃  [5] Webhook delete             ┃  [14]                           ┃
 ┃  [6] Nuker bot                  ┃  [15]                           ┃
-┃  [7] Token spammer[doesn't work]┃  [16]                           ┃
+┃  [7] Channel spammer            ┃  [16]                           ┃
 ┃  [8] Give admin to a user       ┃  [17]                           ┃
 ┃  [9]                            ┃  [18]                           ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
