@@ -12,7 +12,7 @@ def spam():
             print(f"Message sent! ({successful}/{num})")
             time.sleep(0.2)
         elif response.status_code == 429:
-            print("Ratelimited waiting 3 seconds...")
+            print("Ratelimited, waiting 3 seconds...")
             time.sleep(3)
         else:
             print(f"Error occurred {response.status_code}")
@@ -23,7 +23,7 @@ with open("token.txt", "r") as file:
         print("Empty token")
         sys.exit(1)
     elif token == "single token here":
-        print("Edit the file token.txt dumbass")
+        print("Edit the 'token.txt' file dumbass")
         sys.exit(1)
 
 stoken = input("Is this a user token? [y/n] ")
