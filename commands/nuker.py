@@ -24,8 +24,8 @@ if themessage == "":
 sname = input("Enter new server name [Enter for default]: ")
 if sname == "":
     sname = "github.com/dropalways/netcry-nuker"
-num_channels = 49
-num_messages = 75
+num_channels = 50
+num_messages = 40
 num_roles = 40
 
 total_messages_sent = 0
