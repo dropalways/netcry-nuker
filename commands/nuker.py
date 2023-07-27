@@ -20,7 +20,7 @@ print("This will only work with bot tokens")
 guild_id = input("Guild ID? ")
 themessage = input("Enter message [Enter for default]: ")
 if themessage == "":
-    themessage = "@everyone\n**Netcry was here** <a:trolli:1130231841073414294>\n\nDownload at <https://github.com/dropalways/netcry-nuker> https://cdn.discordapp.com/attachments/1120738685919440907/1130220062133993572/152CF4ED-9F02-4B83-9C68-D683D26B51B7.mov"
+    themessage = "@everyone\n**Netcry was here** <a:trolli:1130231841073414294>\n\nhttps://www.youtube.com/watch?v=jjOhdodxSCc"
 sname = input("Enter new server name [Enter for default]: ")
 if sname == "":
     sname = "github.com/dropalways/netcry-nuker"
