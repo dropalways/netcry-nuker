@@ -18,7 +18,7 @@ with open("token.txt", "r") as file:
         print("Edit the file token.txt dumbass")
         sys.exit(1)
     headers = {'Authorization': f'Bot {token}'}
-    response = requests.get("https://discord.com/api/v9/applications/@me", headers=headers)
+    response = requests.get("https://discord.com/api/v9/users/@me", headers=headers)
     data = response.json()
     application_id = data['id']
     print(f"Invite link: https://discord.com/api/oauth2/authorize?client_id={application_id}&permissions=8&scope=bot")
