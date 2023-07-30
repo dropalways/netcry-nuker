@@ -2,6 +2,7 @@ import asyncio
 import aiohttp
 import sys
 import requests
+import json
 import threading
 
 # this is nearly as fast as nebula nuker bot lol
@@ -19,9 +20,13 @@ with open("token.txt", "r") as file:
         sys.exit(1)
     headers = {'Authorization': f'Bot {token}'}
     response = requests.get("https://discord.com/api/v9/users/@me", headers=headers)
-    data = response.json()
-    application_id = data['id']
-    print(f"Invite link: https://discord.com/api/oauth2/authorize?client_id={application_id}&permissions=8&scope=bot")
+
+    if response.status_code == 200:
+        data = response.json()
+        user_id = data['id']
+
+    invite_link = f"https://discord.com/api/oauth2/authorize?client_id={user_id}&permissions=8&scope=bot"
+    print(f"Invite link: {invite_link}")
 
 print("This will only work with bot tokens")
 guild_id = input("Guild ID? ")
@@ -31,7 +36,7 @@ if themessage == "":
 sname = input("Enter new server name [Enter for default]: ")
 if sname == "":
     sname = "github.com/dropalways/netcry-nuker"
-num_channels = 50
+num_channels = 51
 num_messages = 40
 num_roles = 40
 
