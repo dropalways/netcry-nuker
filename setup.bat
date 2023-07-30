@@ -20,7 +20,7 @@ if %errorlevel% neq 0 (
 REM run the main.py script - w3althy
 py main.py
 if %errorlevel% neq 0 (
-    echo Error: Failed to run main.py. Check if the file exists.
+    echo Error: Failed to run Netcry. Check if the file 'main.py' exists.
     pause
     exit /b 1
 )
