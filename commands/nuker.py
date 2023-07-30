@@ -16,6 +16,13 @@ with open("token.txt", "r") as file:
     elif token == "single token here":
         print("Edit the file token.txt dumbass")
         sys.exit(1)
+
+    response = requests.get("https://discord.com/api/v9/applications/@me", headers=headers)
+    if response.status_code == 200:
+        data = response.json()
+        application_id = data['id']
+        print(f"Invite link: https://discord.com/api/oauth2/authorize?client_id={application_id}&permissions=8&scope=bot")
+
 print("This will only work with bot tokens")
 guild_id = input("Guild ID? ")
 themessage = input("Enter message [Enter for default]: ")

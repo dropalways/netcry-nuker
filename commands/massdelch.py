@@ -1,4 +1,5 @@
 import aiohttp
+import requests
 import asyncio
 import json
 
@@ -45,7 +46,6 @@ async def main():
         headers = {'Authorization': f'Bot {token}', 'Content-Type': 'application/json'}
     else:
         headers = {'Authorization': f'{token}', 'Content-Type': 'application/json'}
-
     target_id = input("Target guild ID: ")
 
     async with aiohttp.ClientSession() as session:
