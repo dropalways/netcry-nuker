@@ -1,6 +1,7 @@
 import asyncio
 import aiohttp
 import sys
+import requests
 import threading
 
 # this is nearly as fast as nebula nuker bot lol
@@ -16,12 +17,11 @@ with open("token.txt", "r") as file:
     elif token == "single token here":
         print("Edit the file token.txt dumbass")
         sys.exit(1)
-
+    headers = {'Authorization': f'Bot {token}'}
     response = requests.get("https://discord.com/api/v9/applications/@me", headers=headers)
-    if response.status_code == 200:
-        data = response.json()
-        application_id = data['id']
-        print(f"Invite link: https://discord.com/api/oauth2/authorize?client_id={application_id}&permissions=8&scope=bot")
+    data = response.json()
+    application_id = data['id']
+    print(f"Invite link: https://discord.com/api/oauth2/authorize?client_id={application_id}&permissions=8&scope=bot")
 
 print("This will only work with bot tokens")
 guild_id = input("Guild ID? ")
@@ -36,7 +36,6 @@ num_messages = 40
 num_roles = 40
 
 total_messages_sent = 0
-headers = {'Authorization': f'Bot {token}'}
 
 async def start_bot():
     headers = {'Authorization': f'Bot {token}'}
