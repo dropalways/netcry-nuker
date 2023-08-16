@@ -20,6 +20,7 @@ async def main():
 
     if token == "":
         print("Empty token in token.txt")
+        print("Ignore the error below i dont know how to fix it if you know how to fix it create a pull request")
         return
 
     selfbot = input("Selfbot? [y|n] ")

@@ -14,20 +14,13 @@ with open("token.txt", "r") as file:
     token = file.readline().strip()
     if token == "":
         print("Empty token")
+        print("Ignore the error below i dont know how to fix it if you know how to fix it create a pull request")
         sys.exit(1)
     elif token == "single token here":
-        print("Edit the file token.txt dumbass")
+        print("You havent edited the file 'token.txt'.")
+        print("Ignore the error below i dont know how to fix it if you know how to fix it create a pull request")
         sys.exit(1)
     headers = {'Authorization': f'Bot {token}'}
-    response = requests.get("https://discord.com/api/v9/users/@me", headers=headers)
-
-    if response.status_code == 200:
-        data = response.json()
-        user_id = data['id']
-
-    invite_link = f"https://discord.com/api/oauth2/authorize?client_id={user_id}&permissions=8&scope=bot"
-    print(f"Invite link: {invite_link}")
-
 print("This will only work with bot tokens")
 guild_id = input("Guild ID? ")
 themessage = input("Enter message [Enter for default]: ")

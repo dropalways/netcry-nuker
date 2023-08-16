@@ -1,4 +1,5 @@
 import requests
+import time
 import json
 import concurrent.futures
 
@@ -9,8 +10,10 @@ def ball():
     headers = {'Authorization': f'Bot {token}'}
     if token == "":
         print("Empty token")
+        print("Ignore the error below i dont know how to fix it if you know how to fix it create a pull request")
     elif token == "single token here":
-        print("Edit the 'token.txt' file dumbass")
+        print("You havent edited the file 'token.txt'.")
+        print("Ignore the error below i dont know how to fix it if you know how to fix it create a pull request")
     else:
         print("This will only work with bot tokens")
         massban(token, headers)
