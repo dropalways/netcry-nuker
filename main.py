@@ -1,12 +1,12 @@
+from pystyle import Write, Colors, Colorate
+from colorama import Fore, init
+import colorama
+import requests
+import time
 import os
 import subprocess
 import sys
 sys.dont_write_bytecode = True
-import time
-import requests
-import colorama
-from colorama import Fore, init
-from pystyle import Write, Colors, Colorate
 
 """@a1lw and @loding_x coded this
 if you're planning on skidding this code, keep this comment please and thank you mr skid man"""
@@ -25,6 +25,7 @@ def banner():
                           ░ ░░   ░ ▒░ ░ ░      ░      ░  ▒    ░▒ ░ ▒░ ▓██ ░▒░ \n"""
     print(Colorate.Diagonal(Colors.red_to_purple, banner_text, 8))
 
+
 def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     os.system(f"title Netcry")
@@ -40,7 +41,8 @@ def main():
         sys.exit(1)
 
     headers = {'Authorization': f'Bot {token}'}
-    response = requests.get("https://discord.com/api/v9/users/@me", headers=headers)
+    response = requests.get(
+        "https://discord.com/api/v9/users/@me", headers=headers)
 
     if response.status_code == 200:
         data = response.json()
@@ -49,7 +51,7 @@ def main():
         options = f"""┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃     discord.gg/9rRHUYzCHG       ┃     github.com/dropalways       ┃     github.com/dropalways       ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃  [1] Mass ban                   ┃  [10] . . . . . . . . . . . . . ┃  [19] . . . . . . . . . . . . . ┃
+┃  [1] Mass ban                   ┃  [10] Mass purge messages       ┃  [19] . . . . . . . . . . . . . ┃
 ┃  [2] Mass create channels       ┃  [11] . . . . . . . . . . . . . ┃  [20] . . . . . . . . . . . . . ┃
 ┃  [3] Delete all channels        ┃  [12] . . . . . . . . . . . . . ┃  [21] . . . . . . . . . . . . . ┃
 ┃  [4] Webhook spammer            ┃  [13] . . . . . . . . . . . . . ┃  [22] . . . . . . . . . . . . . ┃
@@ -67,9 +69,9 @@ def main():
         optionsi = """┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃     discord.gg/9rRHUYzCHG       ┃     github.com/dropalways       ┃     github.com/dropalways       ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃  [1] Mass ban                   ┃  [10] . . . . . . . . . . . . . ┃  [10] . . . . . . . . . . . . . ┃
+┃  [1] Mass ban                   ┃  [10] Mass purge messages       ┃  [10] . . . . . . . . . . . . . ┃
 ┃  [2] Mass create channels       ┃  [11] . . . . . . . . . . . . . ┃  [10] . . . . . . . . . . . . . ┃
-┃  [3] Delete all channels        ┃  [12] . . . . . . . . . . . . . ┃   [10] . . . . . . . . . . . . .┃
+┃  [3] Delete all channels        ┃  [12] . . . . . . . . . . . . . ┃  [10] . . . . . . . . . . . . . ┃
 ┃  [4] Webhook spammer            ┃  [13] . . . . . . . . . . . . . ┃  [10] . . . . . . . . . . . . . ┃
 ┃  [5] Webhook deleter            ┃  [14] . . . . . . . . . . . . . ┃  [10] . . . . . . . . . . . . . ┃
 ┃  [6] Nuker bot                  ┃  [15] . . . . . . . . . . . . . ┃  [10] . . . . . . . . . . . . . ┃
@@ -81,9 +83,10 @@ def main():
         print(Colorate.Vertical(Colors.purple_to_red, optionsi, 1))
 
     while True:
-        user_input = Write.Input(f"\n\ntrollinc""@netcry━>>> ", Colors.blue_to_red, interval=0.03)
+        user_input = Write.Input(
+            f"\n\ntrollinc""@netcry━>>> ", Colors.blue_to_red, interval=0.03)
         user_input = user_input.lower()
-    
+
         if user_input == "1":
             subprocess.run(["python", "commands/massban.py"])
             time.sleep(1.9)
@@ -107,7 +110,7 @@ def main():
         elif user_input == "5":
             subprocess.run(["python", "commands/dwebhook.py"])
             time.sleep(1.9)
-            main()        
+            main()
         elif user_input == "6":
             subprocess.run(["python", "commands/nuker.py"])
             time.sleep(1.9)
@@ -124,12 +127,17 @@ def main():
             subprocess.run(["python", "commands/massrole.py"])
             time.sleep(1.9)
             main()
+        elif user_input == "10":
+            subprocess.run(["python", "commands/dallmessage.py"])
+            time.sleep(1.9)
+            main()
         elif user_input == "exit":
             sys.exit()
         else:
-            print(Fore.RED +"Error 404: Command not found")
+            print(Fore.RED + "Error 404: Command not found")
             time.sleep(0.7)
             main()
+
 
 if __name__ == "__main__":
     main()

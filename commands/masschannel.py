@@ -2,6 +2,7 @@ import aiohttp
 import asyncio
 import json
 
+
 async def create_channel(session, target_id, channel_name, channel_type, headers):
     data = {'name': channel_name, 'type': channel_type}
     url = f'https://discord.com/api/v9/guilds/{target_id}/channels'
@@ -12,7 +13,9 @@ async def create_channel(session, target_id, channel_name, channel_type, headers
             print("Rate limited, waiting 0.7 seconds...")
             await asyncio.sleep(0.7)
         else:
-            print(f"Failed to create channel '{channel_name}'. Status code: {response.status}")
+            print(
+                f"Failed to create channel '{channel_name}'. Status code: {response.status}")
+
 
 async def main():
     with open("token.txt", "r") as file:
@@ -30,12 +33,14 @@ async def main():
         bottoken = False
     else:
         print("Invalid answer")
-        return
+        pass
 
     if not bottoken:
-        headers = {'Authorization': f'Bot {token}', 'Content-Type': 'application/json'}
+        headers = {'Authorization': f'Bot {token}',
+                   'Content-Type': 'application/json'}
     else:
-        headers = {'Authorization': f'{token}', 'Content-Type': 'application/json'}
+        headers = {'Authorization': f'{token}',
+                   'Content-Type': 'application/json'}
 
     target_id = input("Target guild ID: ")
     channel_name = input("Channel name: ")
@@ -52,7 +57,8 @@ async def main():
     async with aiohttp.ClientSession() as session:
         tasks = []
         for _ in range(int(how_many)):
-            tasks.append(create_channel(session, target_id, channel_name, channel_type, headers))
+            tasks.append(create_channel(session, target_id,
+                         channel_name, channel_type, headers))
 
         await asyncio.gather(*tasks)
 
