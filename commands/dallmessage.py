@@ -22,7 +22,8 @@ def questions():
     else:
         print("Invalid answer")
         return None, None
-    channel_id = input("What channel do you wanna delete your messages from ")
+    channel_id = input(
+        "What channel ID do you wanna delete your messages from: ")
     return channel_id, headers
 
 
@@ -59,20 +60,24 @@ def delete_messages(channel_id, messages, headers):
     success_count = 0
     for message in messages:
         url = f"https://discord.com/api/v9/channels/{channel_id}/messages/{message['id']}"
-        response = requests.delete(url, headers=headers)
-        if response.status_code == 204:
-            timestamp = datetime.datetime.strptime(
-                message['timestamp'], "%Y-%m-%dT%H:%M:%S.%f%z")
-            formatted_timestamp = timestamp.strftime("%H:%M:%S %d/%m/%y")
-            print(
-                f"Deleted message: {message['content']} (Sent at: {formatted_timestamp})")
-            success_count += 1
-        elif response.status_code == 429:
-            print("Rate limited. Waiting 3 seconds...")
-            time.sleep(3)
-            continue
-        else:
-            print(f"Failed to delete message with ID: {message['id']}")
+        retry_count = 0
+        while retry_count < 3:
+            response = requests.delete(url, headers=headers)
+            if response.status_code == 204:
+                timestamp = datetime.datetime.strptime(
+                    message['timestamp'], "%Y-%m-%dT%H:%M:%S.%f%z")
+                formatted_timestamp = timestamp.strftime("%H:%M:%S %d/%m/%y")
+                print(
+                    f"Deleted message: {message['content']} (Sent at: {formatted_timestamp})")
+                success_count += 1
+                break
+            elif response.status_code == 429:
+                print("Rate limited. Waiting 3 seconds...")
+                time.sleep(3)
+                retry_count += 1
+            else:
+                print(f"Failed to delete message with ID: {message['id']}")
+                break
 
     return success_count
 
@@ -92,7 +97,12 @@ def main():
         print("No messages found.")
     else:
         print(f"Found {len(messages)} messages")
-        amount = int(input("Enter the amount of messages to delete: "))
+        amount = input("Enter the amount of messages to delete (num/all): ")
+        if amount != 'all':
+            amount = int(amount)
+        else:
+            print("Deleting all messages...")
+            amount = len(messages)
         deleted_count = delete_messages(channel_id, messages[:amount], headers)
         print(f"Deleted {deleted_count} messages")
 
