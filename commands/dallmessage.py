@@ -1,9 +1,10 @@
-import requests
+import asyncio
+import aiohttp
 import time
 import datetime
 
 
-def questions():
+async def questions():
     with open("token.txt", "r") as file:
         token = file.readline().strip()
 
@@ -27,7 +28,7 @@ def questions():
     return channel_id, headers
 
 
-def get_messages(channel_id, user_id, headers):
+async def get_messages(channel_id, user_id, headers):
     url = f"https://discord.com/api/v9/channels/{channel_id}/messages"
     params = {
         "limit": 100
@@ -35,64 +36,69 @@ def get_messages(channel_id, user_id, headers):
     messages = []
 
     while True:
-        response = requests.get(url, headers=headers, params=params)
-        if response.status_code == 200:
-            data = response.json()
-            if len(data) == 0:
-                break
-            for message in data:
-                if message['author']['id'] == user_id:
-                    messages.append(message)
-            if len(data) < 100:
-                break
-            params["before"] = data[-1]["id"]
-        elif response.status_code == 429:
-            print("Rate limited. Waiting 10 seconds...")
-            time.sleep(10)
-        else:
-            print("Failed to retrieve messages.")
-            break
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, headers=headers, params=params) as response:
+                if response.status == 200:
+                    data = await response.json()
+                    if len(data) == 0:
+                        break
+                    for message in data:
+                        if message['author']['id'] == user_id:
+                            messages.append(message)
+                    if len(data) < 100:
+                        break
+                    params["before"] = data[-1]["id"]
+                elif response.status == 429:
+                    print("Rate limited. Waiting 10 seconds...")
+                    await asyncio.sleep(10)
+                else:
+                    print("Failed to retrieve messages.")
+                    break
 
     return messages
 
 
-def delete_messages(channel_id, messages, headers):
+async def delete_messages(channel_id, messages, headers):
     success_count = 0
-    for message in messages:
-        url = f"https://discord.com/api/v9/channels/{channel_id}/messages/{message['id']}"
-        retry_count = 0
-        while retry_count < 3:
-            response = requests.delete(url, headers=headers)
-            if response.status_code == 204:
-                timestamp = datetime.datetime.strptime(
-                    message['timestamp'], "%Y-%m-%dT%H:%M:%S.%f%z")
-                formatted_timestamp = timestamp.strftime("%H:%M:%S %d/%m/%y")
-                print(
-                    f"Deleted message: {message['content']} (Sent at: {formatted_timestamp})")
-                success_count += 1
-                break
-            elif response.status_code == 429:
-                print("Rate limited. Waiting 3 seconds...")
-                time.sleep(3)
-                retry_count += 1
-            else:
-                print(f"Failed to delete message with ID: {message['id']}")
-                break
+    async with aiohttp.ClientSession() as session:
+        for message in messages:
+            url = f"https://discord.com/api/v9/channels/{channel_id}/messages/{message['id']}"
+            retry_count = 0
+            while retry_count < 3:
+                async with session.delete(url, headers=headers) as response:
+                    if response.status == 204:
+                        timestamp = datetime.datetime.strptime(
+                            message['timestamp'], "%Y-%m-%dT%H:%M:%S.%f%z")
+                        formatted_timestamp = timestamp.strftime(
+                            "%H:%M:%S %d/%m/%y")
+                        print(
+                            f"Deleted message: {message['content']} (Sent at: {formatted_timestamp})")
+                        await asyncio.sleep(0.3)
+                        success_count += 1
+                        break
+                    elif response.status == 429:
+                        print("Rate limited. Waiting 3 seconds...")
+                        await asyncio.sleep(3)
+                        retry_count += 1
+                    else:
+                        print(
+                            f"Failed to delete message with ID: {message['id']}")
+                        break
 
     return success_count
 
 
-def main():
-    channel_id, headers = questions()
+async def main():
+    channel_id, headers = await questions()
     if channel_id is None or headers is None:
         return
 
-    response = requests.get(
-        "https://discord.com/api/v9/users/@me", headers=headers)
-    data = response.json()
-    user_id = data['id']
+    async with aiohttp.ClientSession() as session:
+        async with session.get("https://discord.com/api/v9/users/@me", headers=headers) as response:
+            data = await response.json()
+            user_id = data['id']
 
-    messages = get_messages(channel_id, user_id, headers)
+    messages = await get_messages(channel_id, user_id, headers)
     if len(messages) == 0:
         print("No messages found.")
     else:
@@ -103,9 +109,9 @@ def main():
         else:
             print("Deleting all messages...")
             amount = len(messages)
-        deleted_count = delete_messages(channel_id, messages[:amount], headers)
+        deleted_count = await delete_messages(channel_id, messages[:amount], headers)
         print(f"Deleted {deleted_count} messages")
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
