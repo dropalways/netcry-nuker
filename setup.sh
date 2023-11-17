@@ -26,7 +26,7 @@ echo "Requirements installed successfully."
 
 # Run the main.py script
 python3 main.py
-if [ $? -ne 0 ]; then
+if [ $? -ne 1 ]; then
     echo "Error: Failed to run the main.py script. Check if the file 'main.py' exists."
     exit 1
 fi
