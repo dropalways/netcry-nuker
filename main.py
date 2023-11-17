@@ -1,11 +1,12 @@
-from pystyle import Write, Colors, Colorate
+from pystyle import Write, Colors
 from colorama import Fore, init
-import colorama
 import requests
 import time
 import os
 import subprocess
 import sys
+
+
 sys.dont_write_bytecode = True
 
 """@a1lw and @loding_x coded this
@@ -15,15 +16,15 @@ init()
 
 
 def banner():
-    banner_text = """   
-                          ███▄    █ ▓█████▄▄▄█████▓ ▄████▄  ██▀███  ▓██   ██▓
-                          ██ ▀█   █ ▓█   ▀▓  ██▒ ▓▒▒██▀ ▀█ ▓██ ▒ ██▒ ▒██  ██▒
-                          ▓██  ▀█ ██▒▒███  ▒ ▓██░ ▒░▒▓█    ▄▓██ ░▄█ ▒  ▒██ ██░
-                          ▓██▒  ▐▌██  ▓█  ▄░ ▓██▓ ░ ▒▓▓▄ ▄██▒██▀▀█▄    ░ ▐██▓░
-                          ▒██░   ▓██░░▒████  ▒██▒ ░ ▒ ▓███▀ ░██▓ ▒██▒  ░ ██▒▓░
-                          ░ ▒░   ▒ ▒ ░░ ▒░   ▒ ░░   ░ ░▒ ▒  ░ ▒▓ ░▒▓░   ██▒▒▒ 
-                          ░ ░░   ░ ▒░ ░ ░      ░      ░  ▒    ░▒ ░ ▒░ ▓██ ░▒░ \n"""
-    print(Colorate.Diagonal(Colors.red_to_purple, banner_text, 8))
+    banner_text = """
+                                                   __                 
+                                       ____  ___  / /_____________  __
+                                      / __ \/ _ \/ __/ ___/ ___/ / / /
+                                     / / / /  __/ /_/ /__/ /  / /_/ / 
+                                    /_/ /_/\___/\__/\___/_/   \__, /  
+                                                             /____/   
+\n"""
+    print(Fore.MAGENTA + banner_text)
 
 
 def main():
@@ -46,43 +47,43 @@ def main():
         data = response.json()
         user_id = data['id']
         invite_link = f"https://discord.com/api/oauth2/authorize?client_id={user_id}&permissions=8&scope=bot"
-        options = f"""┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+        options = f"""{Fore.LIGHTMAGENTA_EX}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃     discord.gg/9rRHUYzCHG       ┃     github.com/dropalways       ┃     github.com/dropalways       ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃  [1] Mass ban                   ┃  [10] Mass purge messages       ┃  [19] . . . . . . . . . . . . . ┃
-┃  [2] Mass create channels       ┃  [11] . . . . . . . . . . . . . ┃  [20] . . . . . . . . . . . . . ┃
-┃  [3] Delete all channels        ┃  [12] . . . . . . . . . . . . . ┃  [21] . . . . . . . . . . . . . ┃
-┃  [4] Webhook spammer            ┃  [13] . . . . . . . . . . . . . ┃  [22] . . . . . . . . . . . . . ┃
-┃  [5] Webhook deleter            ┃  [14] . . . . . . . . . . . . . ┃  [23] . . . . . . . . . . . . . ┃
-┃  [6] Nuker bot                  ┃  [15] . . . . . . . . . . . . . ┃  [24] . . . . . . . . . . . . . ┃
-┃  [7] Channel spammer            ┃  [16] . . . . . . . . . . . . . ┃  [25] . . . . . . . . . . . . . ┃
-┃  [8] Give admin to a user       ┃  [17] . . . . . . . . . . . . . ┃  [26] . . . . . . . . . . . . . ┃
-┃  [9] Mass create roles          ┃  [18] . . . . . . . . . . . . . ┃  [27] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}1{Fore.LIGHTMAGENTA_EX}] Mass ban                   ┃  [{Colors.gray}10{Fore.LIGHTMAGENTA_EX}] Mass purge messages       ┃  [{Colors.gray}19{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}2{Fore.LIGHTMAGENTA_EX}] Mass create channels       ┃  [{Colors.gray}11{Fore.LIGHTMAGENTA_EX}] Mass leave servers        ┃  [{Colors.gray}20{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}3{Fore.LIGHTMAGENTA_EX}] Delete all channels        ┃  [{Colors.gray}12{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃  [{Colors.gray}21{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}4{Fore.LIGHTMAGENTA_EX}] Webhook spammer            ┃  [{Colors.gray}13{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃  [{Colors.gray}22{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}5{Fore.LIGHTMAGENTA_EX}] Webhook deleter            ┃  [{Colors.gray}14{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃  [{Colors.gray}23{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}6{Fore.LIGHTMAGENTA_EX}] Nuker bot                  ┃  [{Colors.gray}15{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃  [{Colors.gray}24{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}7{Fore.LIGHTMAGENTA_EX}] Channel spammer            ┃  [{Colors.gray}16{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃  [{Colors.gray}25{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}8{Fore.LIGHTMAGENTA_EX}] Give admin to a user       ┃  [{Colors.gray}17{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃  [{Colors.gray}26{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}9{Fore.LIGHTMAGENTA_EX}] Mass create roles          ┃  [{Colors.gray}18{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃  [{Colors.gray}27{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃    {invite_link}   ┃
+┃    {Colors.gray}{invite_link}{Fore.LIGHTMAGENTA_EX}   ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"""
         banner()
-        print(Colorate.Vertical(Colors.purple_to_red, options, 1))
+        print(Fore.LIGHTMAGENTA_EX + options)
     else:
-        optionsi = """┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+        options2 = f"""{Fore.LIGHTMAGENTA_EX}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃     discord.gg/9rRHUYzCHG       ┃     github.com/dropalways       ┃     github.com/dropalways       ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃  [1] Mass ban                   ┃  [10] Mass purge messages       ┃  [10] . . . . . . . . . . . . . ┃
-┃  [2] Mass create channels       ┃  [11] . . . . . . . . . . . . . ┃  [10] . . . . . . . . . . . . . ┃
-┃  [3] Delete all channels        ┃  [12] . . . . . . . . . . . . . ┃  [10] . . . . . . . . . . . . . ┃
-┃  [4] Webhook spammer            ┃  [13] . . . . . . . . . . . . . ┃  [10] . . . . . . . . . . . . . ┃
-┃  [5] Webhook deleter            ┃  [14] . . . . . . . . . . . . . ┃  [10] . . . . . . . . . . . . . ┃
-┃  [6] Nuker bot                  ┃  [15] . . . . . . . . . . . . . ┃  [10] . . . . . . . . . . . . . ┃
-┃  [7] Channel spammer            ┃  [16] . . . . . . . . . . . . . ┃  [10] . . . . . . . . . . . . . ┃
-┃  [8] Give admin to a user       ┃  [17] . . . . . . . . . . . . . ┃  [10] . . . . . . . . . . . . . ┃
-┃  [9] Mass create roles          ┃  [18] . . . . . . . . . . . . . ┃  [10] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}1{Fore.LIGHTMAGENTA_EX}] Mass ban                   ┃  [{Colors.gray}10{Fore.LIGHTMAGENTA_EX}] Mass purge messages       ┃  [{Colors.gray}19{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}2{Fore.LIGHTMAGENTA_EX}] Mass create channels       ┃  [{Colors.gray}11{Fore.LIGHTMAGENTA_EX}] Mass leave servers        ┃  [{Colors.gray}20{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}3{Fore.LIGHTMAGENTA_EX}] Delete all channels        ┃  [{Colors.gray}12{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃  [{Colors.gray}21{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}4{Fore.LIGHTMAGENTA_EX}] Webhook spammer            ┃  [{Colors.gray}13{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃  [{Colors.gray}22{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}5{Fore.LIGHTMAGENTA_EX}] Webhook deleter            ┃  [{Colors.gray}14{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃  [{Colors.gray}23{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}6{Fore.LIGHTMAGENTA_EX}] Nuker bot                  ┃  [{Colors.gray}15{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃  [{Colors.gray}24{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}7{Fore.LIGHTMAGENTA_EX}] Channel spammer            ┃  [{Colors.gray}16{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃  [{Colors.gray}25{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}8{Fore.LIGHTMAGENTA_EX}] Give admin to a user       ┃  [{Colors.gray}17{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃  [{Colors.gray}26{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
+┃  [{Colors.gray}9{Fore.LIGHTMAGENTA_EX}] Mass create roles          ┃  [{Colors.gray}18{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃  [{Colors.gray}27{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . . ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"""
         banner()
-        print(Colorate.Vertical(Colors.purple_to_red, optionsi, 1))
+        print(options2)
 
     while True:
         user_input = Write.Input(
-            f"\n\ntrollinc""@netcry━>>> ", Colors.blue_to_red, interval=0.03)
+            f"\n\ntrollinc""@netcry━>>> ", Colors.gray, interval=0.03)
         user_input = user_input.lower()
 
         if user_input == "1":
@@ -127,6 +128,10 @@ def main():
             main()
         elif user_input == "10":
             subprocess.run(["python", "commands/dallmessage.py"])
+            time.sleep(1.9)
+            main()
+        elif user_input == "11":
+            subprocess.run(["python", "commands/massleave.py"])
             time.sleep(1.9)
             main()
         elif user_input == "exit":
