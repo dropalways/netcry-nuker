@@ -81,61 +81,46 @@ def main():
         banner()
         print(options2)
 
+
+        commands = {
+        "1": "massban",
+        "2": "masschannel",
+        "3": "massdelch",
+        "4": "webhook",
+        "5": "dwebhook",
+        "6": "nuker",
+        "7": "tspam",
+        "8": "givadmin",
+        "9": "massrole",
+        "10": "dallmessage",
+        "11": "massleave",
+        "exit": sys.exit
+    }
+
     while True:
-        user_input = Write.Input(
-            f"\n\ntrollinc""@netcry━>>> ", Colors.gray, interval=0.03)
+
+        try:
+            user_input = Write.Input(
+                f"\n\ntrollinc""@netcry━>>> ", Colors.gray, interval=0.03)
+            
+        except KeyboardInterrupt:
+            sys.exit()
+
+
         user_input = user_input.lower()
 
-        if user_input == "1":
-            subprocess.run(["python", "commands/massban.py"])
-            time.sleep(1.9)
-            main()
+        if user_input in commands:
+            if user_input == "exit":
+                commands[user_input]()
+            else:
+                try:
+                    subprocess.run(["python", str(f"commands/{commands.get(user_input)}.py")])
+                except KeyboardInterrupt:
+                    sys.exit()
         elif user_input == "":
-            print("Error enter something")
+            print("Error: Enter something")
             time.sleep(0.7)
             main()
-        elif user_input == "2":
-            subprocess.run(["python", "commands/masschannel.py"])
-            time.sleep(1.9)
-            main()
-        elif user_input == "3":
-            subprocess.run(["python", "commands/massdelch.py"])
-            time.sleep(1.9)
-            main()
-        elif user_input == "4":
-            subprocess.run(["python", "commands/webhook.py"])
-            time.sleep(1.9)
-            main()
-        elif user_input == "5":
-            subprocess.run(["python", "commands/dwebhook.py"])
-            time.sleep(1.9)
-            main()
-        elif user_input == "6":
-            subprocess.run(["python", "commands/nuker.py"])
-            time.sleep(1.9)
-            main()
-        elif user_input == "7":
-            subprocess.run(["python", "commands/tspam.py"])
-            time.sleep(1.9)
-            main()
-        elif user_input == "8":
-            subprocess.run(["python", "commands/givadmin.py"])
-            time.sleep(1.9)
-            main()
-        elif user_input == "9":
-            subprocess.run(["python", "commands/massrole.py"])
-            time.sleep(1.9)
-            main()
-        elif user_input == "10":
-            subprocess.run(["python", "commands/dallmessage.py"])
-            time.sleep(1.9)
-            main()
-        elif user_input == "11":
-            subprocess.run(["python", "commands/massleave.py"])
-            time.sleep(1.9)
-            main()
-        elif user_input == "exit":
-            sys.exit()
         else:
             print(Fore.RED + "Error 404: Command not found")
             time.sleep(0.7)
