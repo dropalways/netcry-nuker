@@ -1,7 +1,7 @@
 import aiohttp
 import asyncio
 import json
-
+from sys import exit
 
 async def create_channel(session, target_id, channel_name, channel_type, headers):
     data = {'name': channel_name, 'type': channel_type}
@@ -25,8 +25,12 @@ async def main():
         print("Empty token in token.txt")
         print("Ignore the error below i dont know how to fix it if you know how to fix it create a pull request")
         return
+    try:
+        control = 0
+        selfbot = input("Selfbot? [y|n] ")
+    except:
+        exit(1)
 
-    selfbot = input("Selfbot? [y|n] ")
     if selfbot == "y":
         bottoken = True
     elif selfbot == "n":

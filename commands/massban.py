@@ -1,7 +1,7 @@
 import requests
 import time
 import concurrent.futures
-
+from sys import exit
 
 def ball():
     with open("token.txt", "r") as file:
@@ -15,8 +15,10 @@ def ball():
         print("Ignore the error below; I don't know how to fix it. If you know how to fix it, create a pull request")
     else:
         print("This will only work with bot tokens")
-        massban(token, headers)
-
+        try:
+            massban(token, headers)
+        except KeyboardInterrupt:
+            exit()
 
 def massban(token, headers):
     guild_id = input("Enter the target guild id: ")
