@@ -8,13 +8,13 @@ import subprocess
 
 
 def update():
-    response = requests.get("https://raw.githubusercontent.com/dropalways/netcry-nuker/test/version.txt")
+    response = requests.get("https://raw.githubusercontent.com/dropalways/netcry-nuker/version.txt")
     with open("version.txt", "r") as file:
         localversion = file.readline().strip()
 
     if localversion < response.text:
         print(f"Local version is: {localversion} Latest: {response.text}")
-        response = requests.get("https://github.com/dropalways/netcry-nuker/archive/refs/heads/test.zip")
+        response = requests.get("https://github.com/dropalways/netcry-nuker/archive/refs/heads/main.zip")
         if response.status_code == 200:
             print("Downloaded latest release")
             temp_dir = tempfile.mkdtemp()
