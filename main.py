@@ -144,7 +144,7 @@ def main():
             if user_input == "exit":
                 commands[user_input]()
             elif user_input == "update":
-                button_callback()
+                update()
             else:
                 try:
                     subprocess.run(["python", str(f"commands/{commands.get(user_input)}.py")])
