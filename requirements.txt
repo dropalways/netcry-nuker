@@ -3,4 +3,3 @@ pystyle
 requests
 asyncio
 aiohttp
-tkinter
