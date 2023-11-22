@@ -1,4 +1,4 @@
-<img src="https://r2.e-z.host/20aca75f-b614-4a0a-af4a-a562b0905973/yqu2hjby.png">
+<img src="resources/terminal.gif">
 
 
 
