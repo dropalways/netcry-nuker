@@ -22,8 +22,11 @@ commands = {
     "9": "massrole",
     "10": "dallmessage",
     "11": "massleave",
-    #   "exit": sys.exit,
+    "exit": sys.exit,
     "mass ban": "massban",
+    "mass create channels": "masschannel",
+    "delete all channels": "massdelch",
+
     #   "reload": "reload",
 }
 
