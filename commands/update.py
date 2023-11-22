@@ -24,7 +24,7 @@ def update():
 
             shutil.unpack_archive(update_zip_path, extract_dir=temp_dir)
 
-            latest_files_dir = os.path.join(temp_dir, 'netcry-nuker-test')
+            latest_files_dir = os.path.join(temp_dir, 'netcry-nuker-main')
             shutil.copytree(latest_files_dir, ".", dirs_exist_ok=True)
 
             print("Update installed successfully.")
