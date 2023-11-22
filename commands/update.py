@@ -8,7 +8,7 @@ import subprocess
 
 
 def update():
-    response = requests.get("https://raw.githubusercontent.com/dropalways/netcry-nuker/version.txt")
+    response = requests.get("https://raw.githubusercontent.com/dropalways/netcry-nuker/main/version.txt")
     with open("version.txt", "r") as file:
         localversion = file.readline().strip()
 
