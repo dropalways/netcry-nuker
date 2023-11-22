@@ -70,7 +70,7 @@ def main():
             root.title("Netcry")
             root.geometry("0x0")
             root.iconify()
-            update_question = messagebox.askyesno("Title", f"Current version({localversion}) isn't up to date with latest release({response.text}) Do you want to install the latest version?", icon='warning')
+            update_question = messagebox.askyesno("Netcry", f"Current version({localversion}) isn't up to date with latest release({response.text}) Do you want to install the latest version?", icon='warning')
             if update_question:
                 update()
                 root.destroy()
