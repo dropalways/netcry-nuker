@@ -5,6 +5,12 @@ import time
 import os
 import subprocess
 import sys
+import tempfile
+import shutil
+import random
+import tkinter as tk
+from tkinter import messagebox
+
 
 sys.dont_write_bytecode = True
 
@@ -22,6 +28,7 @@ commands = {
     "9": "massrole",
     "10": "dallmessage",
     "11": "massleave",
+    "update": "update",
     "exit": sys.exit,
     "mass ban": "massban",
     "mass create channels": "masschannel",
@@ -43,7 +50,33 @@ def banner():
     print(Fore.MAGENTA + banner_text)
 
 
+def update():
+    temp_dir = tempfile.mkdtemp()
+    shutil.copy("commands/update.py", temp_dir)
+    print(temp_dir)
+    subprocess.run(f"start cmd /k python {temp_dir}/update.py", shell=True)
+    sys.exit()
+
+
 def main():
+    response = requests.get(
+        "https://raw.githubusercontent.com/dropalways/netcry-nuker/test/version.txt")  # get latest version
+    with open("version.txt", "r") as file:
+        localversion = file.readline().strip()  # save local version as variable
+    if localversion < response.text:  # compare local version to latest version
+        rng = 7
+        if rng == 7:  # 1/10 chance of displaying this message
+            root = tk.Tk()
+            root.title("Netcry")
+            root.geometry("0x0")
+            root.iconify()
+            update_question = messagebox.askyesno("Title", f"Current version({localversion}) isn't up to date with latest release({response.text}) Do you want to install the latest version?", icon='warning')
+            if update_question:
+                update()
+                root.destroy()
+            else:
+                root.destroy()
+            root.mainloop()
     os.system('clear' if os.name != 'nt' else 'cls')
     os.system(f"title Netcry")
     with open("token.txt", "r") as file:
@@ -78,6 +111,7 @@ def main():
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃    {Colors.gray}{invite_link}{Fore.LIGHTMAGENTA_EX}   ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"""
+        os.system('clear' if os.name != 'nt' else 'cls')
         banner()
         print(Fore.LIGHTMAGENTA_EX + options)
     else:
@@ -109,6 +143,8 @@ def main():
         if user_input in commands:
             if user_input == "exit":
                 commands[user_input]()
+            elif user_input == "update":
+                button_callback()
             else:
                 try:
                     subprocess.run(["python", str(f"commands/{commands.get(user_input)}.py")])
