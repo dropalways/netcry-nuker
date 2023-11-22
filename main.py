@@ -64,7 +64,7 @@ def main():
     with open("version.txt", "r") as file:
         localversion = file.readline().strip()  # save local version as variable
     if localversion < response.text:  # compare local version to latest version
-        rng = 7
+        rng = random.randint(1,10)
         if rng == 7:  # 1/10 chance of displaying this message
             root = tk.Tk()
             root.title("Netcry")
