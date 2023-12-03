@@ -60,7 +60,7 @@ def update():
 
 def main():
     response = requests.get(
-        "https://raw.githubusercontent.com/dropalways/netcry-nuker/version.txt")  # get latest version
+        "https://raw.githubusercontent.com/dropalways/netcry-nuker/main/version.txt")  # get latest version
     with open("version.txt", "r") as file:
         localversion = file.readline().strip()  # save local version as variable
     if localversion < response.text:  # compare local version to latest version
