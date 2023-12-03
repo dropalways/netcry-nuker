@@ -108,9 +108,9 @@ def main():
 ┃  [{Colors.gray}7{Fore.LIGHTMAGENTA_EX}] {Colors.gray}Channel spammer{Fore.LIGHTMAGENTA_EX}            ┃  [{Colors.gray}16{Fore.LIGHTMAGENTA_EX}] {Colors.gray}. . . . . . . . . . . . .{Fore.LIGHTMAGENTA_EX} ┃  [{Colors.gray}25{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . .{Fore.LIGHTMAGENTA_EX} ┃
 ┃  [{Colors.gray}8{Fore.LIGHTMAGENTA_EX}] {Colors.gray}Give admin to a user{Fore.LIGHTMAGENTA_EX}       ┃  [{Colors.gray}17{Fore.LIGHTMAGENTA_EX}] {Colors.gray}. . . . . . . . . . . . .{Fore.LIGHTMAGENTA_EX} ┃  [{Colors.gray}26{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . .{Fore.LIGHTMAGENTA_EX} ┃
 ┃  [{Colors.gray}9{Fore.LIGHTMAGENTA_EX}] {Colors.gray}Mass create roles{Fore.LIGHTMAGENTA_EX}          ┃  [{Colors.gray}18{Fore.LIGHTMAGENTA_EX}] {Colors.gray}. . . . . . . . . . . . .{Fore.LIGHTMAGENTA_EX} ┃  [{Colors.gray}27{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . .{Fore.LIGHTMAGENTA_EX} ┃
-┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃    {Colors.gray}{invite_link}{Fore.LIGHTMAGENTA_EX}   ┃
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"""
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"""  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻
         os.system('clear' if os.name != 'nt' else 'cls')
         banner()
         print(Fore.LIGHTMAGENTA_EX + options)
@@ -127,7 +127,7 @@ def main():
 ┃  [{Colors.gray}7{Fore.LIGHTMAGENTA_EX}] {Colors.gray}Channel spammer{Fore.LIGHTMAGENTA_EX}            ┃  [{Colors.gray}16{Fore.LIGHTMAGENTA_EX}] {Colors.gray}. . . . . . . . . . . . .{Fore.LIGHTMAGENTA_EX} ┃  [{Colors.gray}25{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . .{Fore.LIGHTMAGENTA_EX} ┃
 ┃  [{Colors.gray}8{Fore.LIGHTMAGENTA_EX}] {Colors.gray}Give admin to a user{Fore.LIGHTMAGENTA_EX}       ┃  [{Colors.gray}17{Fore.LIGHTMAGENTA_EX}] {Colors.gray}. . . . . . . . . . . . .{Fore.LIGHTMAGENTA_EX} ┃  [{Colors.gray}26{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . .{Fore.LIGHTMAGENTA_EX} ┃
 ┃  [{Colors.gray}9{Fore.LIGHTMAGENTA_EX}] {Colors.gray}Mass create roles{Fore.LIGHTMAGENTA_EX}          ┃  [{Colors.gray}18{Fore.LIGHTMAGENTA_EX}] {Colors.gray}. . . . . . . . . . . . .{Fore.LIGHTMAGENTA_EX} ┃  [{Colors.gray}27{Fore.LIGHTMAGENTA_EX}] . . . . . . . . . . . . .{Fore.LIGHTMAGENTA_EX} ┃
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"""
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"""
         banner()
         print(options2)
 
