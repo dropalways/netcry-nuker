@@ -64,13 +64,13 @@ def main():
     with open("version.txt", "r") as file:
         localversion = file.readline().strip()  # save local version as variable
     if localversion < response.text:  # compare local version to latest version
-        rng = 7
+        rng = random.randint(1,10)
         if rng == 7:  # 1/10 chance of displaying this message
             root = tk.Tk()
             root.title("Netcry")
             root.geometry("0x0")
             root.iconify()
-            update_question = messagebox.askyesno("Title", f"Current version({localversion}) isn't up to date with latest release({response.text}) Do you want to install the latest version?", icon='warning')
+            update_question = messagebox.askyesno("Netcry", f"Current version({localversion}) isn't up to date with latest release({response.text}) Do you want to install the latest version?", icon='warning')
             if update_question:
                 update()
                 root.destroy()
@@ -144,7 +144,7 @@ def main():
             if user_input == "exit":
                 commands[user_input]()
             elif user_input == "update":
-                button_callback()
+                update()
             else:
                 try:
                     subprocess.run(["python", str(f"commands/{commands.get(user_input)}.py")])
