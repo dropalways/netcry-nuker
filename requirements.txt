@@ -1,5 +1,6 @@
-colorama
-pystyle
-requests
-asyncio
-aiohttp
+	colorama
+		pystyle
+			requests
+				asyncio
+					aiohttp
+
