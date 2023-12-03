@@ -32,9 +32,7 @@ commands = {
     "exit": sys.exit,
     "mass ban": "massban",
     "mass create channels": "masschannel",
-    "delete all channels": "massdelch",
-
-    #   "reload": "reload",
+    "delete all channels": "massdelch"
 }
 
 
@@ -147,7 +145,10 @@ def main():
                 update()
             else:
                 try:
+                    os.system('clear' if os.name != 'nt' else 'cls')
                     subprocess.run(["python", str(f"commands/{commands.get(user_input)}.py")])
+                    time.sleep(0.7)
+                    main()
                 except KeyboardInterrupt:
                     sys.exit()
         elif user_input == "":
