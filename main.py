@@ -8,8 +8,7 @@ import sys
 import tempfile
 import shutil
 import random
-import tkinter as tk
-from tkinter import messagebox
+import easygui
 
 
 sys.dont_write_bytecode = True
@@ -53,28 +52,33 @@ def update():
     shutil.copy("commands/update.py", temp_dir)
     print(temp_dir)
     subprocess.run(f"start cmd /k python {temp_dir}/update.py", shell=True)
-    sys.exit()
+    sys.exit(0)
 
 
 def main():
-    response = requests.get(
-        "https://raw.githubusercontent.com/dropalways/netcry-nuker/main/version.txt")  # get latest version
+    response = requests.get("https://raw.githubusercontent.com/dropalways/netcry-nuker/main/version.txt")  # get latest version
     with open("version.txt", "r") as file:
         localversion = file.readline().strip()  # save local version as variable
     if localversion < response.text:  # compare local version to latest version
-        rng = random.randint(1,10)
+        # rng = random.randint(1,10)
+        rng = 7
         if rng == 7:  # 1/10 chance of displaying this message
-            root = tk.Tk()
-            root.title("Netcry")
-            root.geometry("0x0")
-            root.iconify()
-            update_question = messagebox.askyesno("Netcry", f"Current version({localversion}) isn't up to date with latest release({response.text}) Do you want to install the latest version?", icon='warning')
-            if update_question:
+            result = easygui.buttonbox(f"Current version({localversion}) isn't up to date with the latest release({response.text}). Do you want to install the latest version?", title="Netcry", choices=["OK", "No"])
+            # root = tk.Tk()
+            # root.title("Netcry")
+            # root.geometry("0x0")
+            # root.iconify()
+            # update_question = messagebox.askyesno("Netcry", f"Current version({localversion}) isn't up to date with latest release({response.text}) Do you want to install the latest version?", icon='warning')
+            # if update_question:
+            #     update()
+            #     root.destroy()
+            # else:
+            #     root.destroy()
+            # root.mainloop()
+            if result == "OK":
                 update()
-                root.destroy()
             else:
-                root.destroy()
-            root.mainloop()
+                pass
     os.system('clear' if os.name != 'nt' else 'cls')
     os.system(f"title Netcry")
     with open("token.txt", "r") as file:
