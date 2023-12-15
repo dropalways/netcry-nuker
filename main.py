@@ -10,7 +10,6 @@ import shutil
 import random
 import easygui
 
-
 sys.dont_write_bytecode = True
 
 init()
@@ -56,13 +55,16 @@ def update():
 
 
 def main():
-    response = requests.get("https://raw.githubusercontent.com/dropalways/netcry-nuker/main/version.txt")  # get latest version
+    response = requests.get(
+        "https://raw.githubusercontent.com/dropalways/netcry-nuker/main/version.txt")  # get latest version
     with open("version.txt", "r") as file:
         localversion = file.readline().strip()  # save local version as variable
     if localversion < response.text:  # compare local version to latest version
-        rng = random.randint(1,10)
+        rng = random.randint(1, 10)
         if rng == 7:  # 1/10 chance of displaying this message
-            result = easygui.buttonbox(f"Current version({localversion}) isn't up to date with the latest release({response.text}). Do you want to install the latest version?", title="Netcry", choices=["OK", "No"])
+            result = easygui.buttonbox(
+                f"Current version({localversion}) isn't up to date with the latest release({response.text}). Do you want to install the latest version?",
+                title="Netcry", choices=["OK", "No"])
             # root = tk.Tk()
             # root.title("Netcry")
             # root.geometry("0x0")

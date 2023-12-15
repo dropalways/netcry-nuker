@@ -6,8 +6,6 @@ import json
 import threading
 
 
-# property of @a1lw on discord or https://github.com/dropalways
-
 with open("token.txt", "r") as file:
     token = file.readline().strip()
     if token == "":
@@ -23,7 +21,7 @@ print("This will only work with bot tokens")
 guild_id = input("Guild ID? ")
 themessage = input("Enter message [Enter for default]: ")
 if themessage == "":
-    themessage = "@everyone\n**Netcry was here** <a:trolli:1130231841073414294>\n\nhttps://www.youtube.com/watch?v=jjOhdodxSCc"
+    themessage = "@everyone\n**Netcry was here** \n\nhttps://github.com/dropalways/netcry-nuker"
 sname = input("Enter new server name [Enter for default]: ")
 if sname == "":
     sname = "github.com/dropalways/netcry-nuker"
